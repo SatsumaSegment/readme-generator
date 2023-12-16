@@ -10,7 +10,8 @@ const questions = [
     "Please write installation instructions: ",
     "Please write usage instructions: ",
     "Please select a license: ",
-    "Please list any contributors, separated by commas: ",
+    "Please enter contribution instructions: ",
+    "Please enter a Tests section: ",
     "Please provide your GitHub username: ",
     "Please provide your GitHub email: ",
 ];
@@ -40,9 +41,9 @@ license.forEach((lcns) => {
 });
 
 // function to write README file
-function writeToFile(fileName, data) {
+function writeToFile(projectName, data) {
     fs.writeFile("README.md", data, (err) => {
-        err ? console.error(err) : console.log(`A README from ${fileName} has been successfully created`);
+        err ? console.error(err) : console.log(`A README from ${projectName} has been successfully created`);
     });
 }
 
@@ -53,7 +54,7 @@ function init() {
             {
                 type: "input",
                 message: questions[0],
-                name: "ProjectName",
+                name: "projectName",
             },
             {
                 type: "input",
@@ -79,21 +80,26 @@ function init() {
             {
                 type: "input",
                 message: questions[5],
-                name: "contributors",
+                name: "contributing",
             },
             {
                 type: "input",
                 message: questions[6],
+                name: "Tests",
+            },
+            {
+                type: "input",
+                message: questions[7],
                 name: "username",
             },
             {
                 type: "input",
-                messsage: questions[7],
+                messsage: questions[8],
                 name: "email",
             },
         ])
         .then((data) => {
-            console.log(data);
+            writeToFile(data.projectName, generateMarkdown(data));
         });
 }
 
