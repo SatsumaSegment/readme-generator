@@ -16,7 +16,7 @@ const questions = [
     "Please provide your GitHub email: ",
 ];
 
-const license = [
+const licenses = [
     ["Apache 2.0 License", "[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)"],
     ["Boost Software License 1.0", "[![License](https://img.shields.io/badge/License-Boost_1.0-lightblue.svg)](https://www.boost.org/LICENSE_1_0.txt)"],
     ["BSD 3-Clause License", "[![License](https://img.shields.io/badge/License-BSD_3--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)"],
@@ -35,9 +35,9 @@ const license = [
     ["The zlib/libpng License", "[![License: Zlib](https://img.shields.io/badge/License-Zlib-lightgrey.svg)](https://opensource.org/licenses/Zlib)"],
 ];
 
-licenseNames = [];
-license.forEach((lcns) => {
-    licenseNames.push(lcns[0]);
+const licenseNames = [];
+licenses.forEach((license) => {
+    licenseNames.push(license[0]);
 });
 
 // function to write README file
@@ -75,7 +75,7 @@ function init() {
                 type: "list",
                 message: questions[4],
                 choices: licenseNames,
-                name: "licence",
+                name: "license",
             },
             {
                 type: "input",
@@ -99,7 +99,13 @@ function init() {
             },
         ])
         .then((data) => {
-            writeToFile(data.projectName, generateMarkdown(data));
+            let badge;
+            licenses.forEach((license) => {
+                if (data.license === license[0]) {
+                    badge = license[1];
+                }
+            });
+            writeToFile(data.projectName, generateMarkdown(data, badge));
         });
 }
 
