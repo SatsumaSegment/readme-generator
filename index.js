@@ -17,6 +17,7 @@ const questions = [
     "Please provide your GitHub email: ",
 ];
 
+// Licenses and their corresponding badges
 const licenses = [
     ["Apache 2.0 License", "[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)"],
     ["Boost Software License 1.0", "[![License](https://img.shields.io/badge/License-Boost_1.0-lightblue.svg)](https://www.boost.org/LICENSE_1_0.txt)"],
@@ -36,6 +37,7 @@ const licenses = [
     ["The zlib/libpng License", "[![License: Zlib](https://img.shields.io/badge/License-Zlib-lightgrey.svg)](https://opensource.org/licenses/Zlib)"],
 ];
 
+// Create a list of license names for inquirer selection
 const licenseNames = [];
 licenses.forEach((license) => {
     licenseNames.push(license[0]);
@@ -50,6 +52,7 @@ function writeToFile(projectName, data) {
 
 // function to initialize program
 function init() {
+    // Prompt the user
     inquirer
         .prompt([
             {
@@ -107,7 +110,18 @@ function init() {
             },
         ])
         .then((data) => {
-            if (data.includeImage !== undefined || data.includeImage !== null) {
+            let markdownImages = ""; // Variable to store included images in markdown form
+            // Select the correct badge based on chosen license
+            let badge;
+            licenses.forEach((license) => {
+                if (data.license === license[0]) {
+                    badge = license[1];
+                }
+            });
+
+            // Check if user wanter to include images
+            if (data.includeImages == "Yes") {
+                // Prompt user for file paths
                 inquirer
                     .prompt([
                         {
@@ -117,8 +131,7 @@ function init() {
                         },
                     ])
                     .then((imageData) => {
-                        let markdownImages = "";
-                        console.log(imageData);
+                        // Format images to markdown
                         if (imageData.images != "") {
                             let images = imageData.images.split(" ");
                             let markdownImagesArr = [];
@@ -127,16 +140,11 @@ function init() {
                             });
                             markdownImages = markdownImagesArr.join(" ");
                         }
-
-                        let badge;
-                        licenses.forEach((license) => {
-                            if (data.license === license[0]) {
-                                badge = license[1];
-                            }
-                        });
+                        // Write data to file
                         writeToFile(data.projectName, generateMarkdown(data, badge, markdownImages));
                     });
             }
+            writeToFile(data.projectName, generateMarkdown(data, badge, markdownImages));
         });
 }
 
