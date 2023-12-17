@@ -7,6 +7,7 @@ const generateMarkdown = require("./utils/generateMarkdown");
 const questions = [
     "What is the name of your project? ",
     "Please write a Description of your project: ",
+    "Would you like to include any pictures in your description? ",
     "Please write installation instructions: ",
     "Please write usage instructions: ",
     "Please select a license: ",
@@ -61,6 +62,7 @@ function init() {
                 message: questions[1],
                 name: "description",
             },
+
             {
                 type: "input",
                 message: questions[2],
@@ -97,15 +99,44 @@ function init() {
                 messsage: questions[8],
                 name: "email",
             },
+            {
+                type: "list",
+                message: questions[9],
+                name: "includeImages",
+                choices: ["Yes", "No"],
+            },
         ])
         .then((data) => {
-            let badge;
-            licenses.forEach((license) => {
-                if (data.license === license[0]) {
-                    badge = license[1];
-                }
-            });
-            writeToFile(data.projectName, generateMarkdown(data, badge));
+            if (data.includeImage !== undefined || data.includeImage !== null) {
+                inquirer
+                    .prompt([
+                        {
+                            type: "input",
+                            message: "Please enter the file path to the images you want to include, separated by a space: ",
+                            name: "images",
+                        },
+                    ])
+                    .then((imageData) => {
+                        let markdownImages = "";
+                        console.log(imageData);
+                        if (imageData.images != "") {
+                            let images = imageData.images.split(" ");
+                            let markdownImagesArr = [];
+                            images.forEach((image) => {
+                                markdownImagesArr.push(`![image](${image})\n\n`);
+                            });
+                            markdownImages = markdownImagesArr.join(" ");
+                        }
+
+                        let badge;
+                        licenses.forEach((license) => {
+                            if (data.license === license[0]) {
+                                badge = license[1];
+                            }
+                        });
+                        writeToFile(data.projectName, generateMarkdown(data, badge, markdownImages));
+                    });
+            }
         });
 }
 

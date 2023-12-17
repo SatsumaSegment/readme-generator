@@ -1,5 +1,5 @@
 // function to generate markdown for README
-function generateMarkdown(data, badge) {
+function generateMarkdown(data, badge, images) {
     return `# ${data.projectName}
 
     
@@ -7,6 +7,9 @@ function generateMarkdown(data, badge) {
 
 
   ${data.description}
+
+
+  ${images}
 
 
   ## Table of Contents
