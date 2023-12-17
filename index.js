@@ -7,7 +7,6 @@ const generateMarkdown = require("./utils/generateMarkdown");
 const questions = [
     "What is the name of your project? ",
     "Please write a Description of your project: ",
-    "Would you like to include any pictures in your description? ",
     "Please write installation instructions: ",
     "Please write usage instructions: ",
     "Please select a license: ",
@@ -15,6 +14,7 @@ const questions = [
     "Please enter a Tests section: ",
     "Please provide your GitHub username: ",
     "Please provide your GitHub email: ",
+    "Would you like to include any pictures in your description? ",
 ];
 
 // Licenses and their corresponding badges

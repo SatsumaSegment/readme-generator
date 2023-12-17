@@ -1,76 +1,51 @@
-# 
+# README Generator
 
-    
-  ## Description
+## Description
 
+This is a README generator written in Javascript. It is designed to produce a high quality README file populated with data given by the user in the form of prompts via the commant-line interface. This application uses Node.JS and the inquirer library. Below is an image demonstrating the script and an image showing some of the code.
 
-  
+![image](demo.png)
 
+![image](code.png)
 
-  ![image](test.png)
+## Table of Contents
 
- ![image](test2.png)
+[Installation](#installation)
 
+[Usage](#usage)
 
+[License](#license)
 
+[Contributing](#contributing)
 
-  ## Table of Contents
+[Contributing](#contributing)
 
+## Installation
 
-  [Installation](#installation)
+To install this application, clone the repository, navigate your terminal to the same directory as `package.json` and run `npm install package.json` in the terminal.
 
+## Usage
 
-  [Usage](#usage)
+To user this application, make sure you are in the same directory as `index.js`, open your terminal and run `node index`. You will then be presented with a series of prompts, follow the prompts and a README file will be generated.
 
+## License
 
-  [License](#license)
+MIT
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-  [Contributing](#contributing)
+## Contributing
 
+To contribute please submit a pull request for review.
 
-  [Contributing](#contributing)
+## Tests
 
+Tests have been conducted to alleviate any issues with data, for example, when the user enters nothing or when they attempt to enter a "bad" string. Feel free to test the application and report and bugs or errors you may encounter.
 
-  ## Installation
+## Questions
 
+If you have any questions please contact me via the email or via my GitHub account below.
 
-  
+notanemail@gmail.com
 
-
-  ## Usage
-
-
-  
-
-
-  ## License
-
-
-  Apache 2.0 License
-
-
-  [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-
-
-  ## Contributing
-
-
-  
-
-
-  ## Tests
-
-
-  
-
-
-  ## Questions
-
-
-  If you have any questions please contact me via the email or via my GitHub account below.
-
-  
-
-  
-
+SatsumaSegment
